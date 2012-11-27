@@ -37,28 +37,16 @@
     return self;
 }
 
-- (void)getTransactionsWithSuccess:(getTransSuccessBlock)success failure:(getTransFailureBlock)failure
-{
-    [self getPath:@"transactions.json" 
-       parameters:nil 
-          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              
-              NSLog(@"Successful Result!");
-          } 
-          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-              NSLog(@"Failed Result.. :(");
-          }];
-}
 
-- (void)postTransactionsWithParameters:(NSDictionary*)params success:(postTransSuccessBlock)success failure:(postTransFailureBlock)failure
+- (void)postToTimsServerWithParameters:(NSDictionary*)params success:(CMAPIClientSuccessBlock)success failure:(CMAPIClientFailureBlock)failure
 {
-    [self postPath:@"transactions"
+    [self postPath:@"http://timarm.com/covrme/response.php"
         parameters:params
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-               //
+               success();
            } 
            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-               //
+               failure(operation.response, error);
            }
      ];
 }

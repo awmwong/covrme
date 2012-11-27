@@ -11,13 +11,12 @@
 @interface CMAPIClient : AFHTTPClient
 + (CMAPIClient*) sharedClient;
 
-typedef void(^getTransSuccessBlock)(NSURLRequest *request, NSHTTPURLResponse *response, NSMutableArray *transArray);
-typedef void(^getTransFailureBlock)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error);
-- (void)getTransactionsWithSuccess:(getTransSuccessBlock)success failure:(getTransFailureBlock)failure;
+typedef void(^CMAPIClientStartupBlock)(NSOperation* operation);
+typedef void(^CMAPIClientSuccessBlock) ();
+typedef void(^CMAPIClientCompletionBlock)();
+typedef void(^CMAPIClientFailureBlock)(NSHTTPURLResponse *response, NSError *error);
 
-typedef void(^postTransSuccessBlock)(NSURLRequest *request, NSHTTPURLResponse *response, NSMutableArray *transArray);
-typedef void(^postTransFailureBlock)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error);
-- (void)postTransactionsWithParameters:(NSDictionary*)params Success:(postTransSuccessBlock)success failure:(postTransFailureBlock)failure;
+- (void)postToTimsServerWithParameters:(NSDictionary*)params success:(CMAPIClientSuccessBlock)success failure:(CMAPIClientFailureBlock)failure;
 
 
 @end

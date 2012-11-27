@@ -47,12 +47,6 @@
     [super viewDidLoad];    
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"New!" style:UIBarButtonItemStyleBordered target:self action:@selector(newTransEventHandler)];
-    
-    [[CMAPIClient sharedClient] getTransactionsWithSuccess:^(NSURLRequest *request, NSHTTPURLResponse *response, NSMutableArray *transArray) {
-        //
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        //  
-    }];
 }
 
 - (void)viewDidUnload

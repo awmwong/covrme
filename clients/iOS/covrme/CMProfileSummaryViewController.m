@@ -7,6 +7,7 @@
 //
 
 #import "CMProfileSummaryViewController.h"
+#import "CMAPIClient.h"
 
 @implementation CMProfileSummaryViewController
 
@@ -65,6 +66,16 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+}
+- (IBAction)omwTapped:(id)sender
+{
+    
+    [[CMAPIClient sharedClient] postToTimsServerWithParameters:nil
+                                                       success:^{
+                                                           //
+                                                       } failure:^(NSHTTPURLResponse *response, NSError *error) {
+                                                           //
+                                                       }];
 }
 
 @end

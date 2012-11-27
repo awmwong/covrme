@@ -35,6 +35,13 @@
     // Please populate AirshipConfig.plist with your info from http://go.urbanairship.com
     [UAirship takeOff:takeOffOptions];
     
+    
+    // Register for notifications
+    [[UAPush shared]
+     registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                         UIRemoteNotificationTypeSound |
+                                         UIRemoteNotificationTypeAlert)];
+    
 //    UIViewController *transList = [[CMTransactionsListViewController alloc] initWithNibName:@"CMTransactionsListViewController" bundle:nil];
 //    UINavigationController *transNav = [[UINavigationController alloc] initWithRootViewController:transList];
     UIViewController *CMProfileVC = [[CMProfileSummaryViewController alloc] initWithNibName:@"CMProfileSummaryViewController" bundle:nil];
@@ -82,6 +89,19 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+    [UAirship land];
+}
+
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    // Updates the device token and registers the token with UA
+    [[UAPush shared] registerDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
+{
+    NSLog(@"FAILED TO REGISTER FOR PUSH: %@", err);
 }
 
 /*
